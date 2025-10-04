@@ -44,7 +44,7 @@ export default function SignupPage() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
+    <div className="max-w-md mx-auto mt-8 p-6 rounded-lg shadow-md">
       <h1 className="text-2xl font-bold mb-6">Sign Up</h1>
       <form onSubmit={handleSignup}>
         <div className="mb-4">
