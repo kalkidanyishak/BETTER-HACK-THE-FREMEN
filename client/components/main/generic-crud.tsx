@@ -140,7 +140,7 @@ export function GenericCrudPage<TData extends { id: number | string }>({
 
   return (
     <div className="p-6">
-      <div className="flex items-center justify-start gap-4 mb-4">
+      <div className="flex items-center justify-center gap-4 mb-6">
         <h1 className="text-2xl font-semibold">{title}</h1>
         <MegaDialog
           trigger={<Button variant='outline' size="sm"><PlusSquareIcon/> {singularTitle}</Button>}

@@ -41,14 +41,14 @@ export function DataTable<TData>({
             value={globalFilter ?? ""}
             onChange={(e) => setGlobalFilter(e.target.value)}
             placeholder="Search all columns..."
-            className="max-w-sm p-4"
+            className="max-w-sm p-4 mb-3"
           />
         </div>
       )}
 
       {/* 🔹 Table */}
       <div className="rounded-md border shadow-sm overflow-hidden">
-        <table className="w-full">
+        <table className="w-full shadow-sm">
           <thead className="bg-muted/50">
             {table.getHeaderGroups().map((hg) => (
               <tr key={hg.id}>
