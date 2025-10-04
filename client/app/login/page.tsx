@@ -4,6 +4,9 @@
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -50,7 +53,7 @@ export default function LoginPage() {
           <label htmlFor="email" className="block text-sm font-medium mb-2">
             Email
           </label>
-          <input
+          <Input
             type="email"
             id="email"
             value={email}
@@ -63,7 +66,7 @@ export default function LoginPage() {
           <label htmlFor="password" className="block text-sm font-medium mb-2">
             Password
           </label>
-          <input
+          <Input
             type="password"
             id="password"
             value={password}
@@ -73,13 +76,13 @@ export default function LoginPage() {
           />
         </div>
         {error && <p className="text-red-500 mb-4">{error}</p>}
-        <button
+        <Button
           type="submit"
           disabled={loading}
           className="w-full bg-blue-500 text-white p-2 rounded-md disabled:opacity-50"
         >
           {loading ? "Logging In..." : "Log In"}
-        </button>
+        </Button>
       </form>
       <p className="mt-4 text-center">
         Don't have an account?{" "}
