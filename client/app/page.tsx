@@ -1,88 +1,69 @@
-import Link from "next/link"; // Import the Link component
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="font-sans grid grid-rows-[auto_1fr_auto] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-8 row-start-2 items-center sm:items-start text-center sm:text-left">
-        <h1 className="text-4xl sm:text-5xl font-bold leading-tight tracking-tight">
+    <div className="min-h-screen flex flex-col justify-between bg-gradient-to-br from-gray-50 via-gray-100 to-gray-200 dark:from-gray-900 dark:via-gray-800 dark:to-gray-950 transition-colors duration-500 font-sans">
+      {/* Hero Section */}
+      <main className="flex flex-col items-center text-center px-6 sm:px-20 pt-32 gap-12">
+        <h1 className="text-4xl sm:text-5xl font-extrabold tracking-tight text-gray-900 dark:text-white">
           AutoERP: Dynamic ERP Scaffolder
         </h1>
-        <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 max-w-2xl">
+        <p className="text-lg sm:text-xl text-gray-700 dark:text-gray-300 max-w-3xl">
           Quickly generate customized ERP modules like HR, Finance, and Inventory based on your unique business needs.
-          Save time, reduce complexity, and make powerful ERP solutions accessible for small and medium businesses.
+          Save time, reduce complexity, and empower small and medium businesses with powerful ERP solutions.
         </p>
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row mt-6">
-          <Link href="/dashboard" passHref>
-            <span
-              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-600 text-white gap-2 hover:bg-blue-700 dark:hover:bg-blue-500 font-medium text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto"
-              rel="noopener noreferrer"
-            >
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6 w-full sm:w-auto">
+          <Link href="/dashboard">
+            <span className="w-full sm:w-auto text-white font-semibold px-8 py-3 rounded-full bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 shadow-lg transition-all">
               Get Started Free
             </span>
           </Link>
-          {/* For external links or placeholder links, a regular <a> can still be used */}
           <a
-            className="rounded-full border border-solid border-gray-300 dark:border-gray-700 transition-colors flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-transparent font-medium text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto"
-            href="#" // Replace with your "Learn More" link
-            rel="noopener noreferrer"
+            href="#"
+            className="w-full sm:w-auto font-semibold px-8 py-3 rounded-full border border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 transition-all"
           >
             Learn More
           </a>
         </div>
 
-        <section className="mt-12 w-full max-w-4xl">
-          <h2 className="text-2xl sm:text-3xl font-bold mb-6 text-center">
-            How it Works
-          </h2>
-          <ol className="list-decimal list-inside text-lg text-gray-800 dark:text-gray-200 grid sm:grid-cols-3 gap-8">
-            <li className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
-              <h3 className="font-semibold text-xl mb-2">1. Define Your Needs</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Tell us about your business and the ERP modules you require (HR, Finance, Inventory, CRM, etc.).
-              </p>
-            </li>
-            <li className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
-              <h3 className="font-semibold text-xl mb-2">2. Customize & Configure</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Tailor fields, workflows, and integrations to perfectly match your operations.
-              </p>
-            </li>
-            <li className="bg-white dark:bg-gray-900 p-6 rounded-lg shadow-md">
-              <h3 className="font-semibold text-xl mb-2">3. Deploy Your ERP</h3>
-              <p className="text-gray-600 dark:text-gray-400">
-                Generate and deploy your bespoke ERP solution with minimal effort.
-              </p>
-            </li>
-          </ol>
+        {/* How it Works Section */}
+        <section className="w-full max-w-5xl mt-16 grid sm:grid-cols-3 gap-8">
+          {[
+            {
+              title: "Define Your Needs",
+              description:
+                "Tell us about your business and the ERP modules you require (HR, Finance, Inventory, CRM, etc.).",
+            },
+            {
+              title: "Customize & Configure",
+              description:
+                "Tailor fields, workflows, and integrations to perfectly match your operations.",
+            },
+            {
+              title: "Deploy Your ERP",
+              description:
+                "Generate and deploy your bespoke ERP solution with minimal effort.",
+            },
+          ].map((step, idx) => (
+            <div
+              key={idx}
+              className="bg-white dark:bg-gray-900 rounded-2xl p-6 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-1"
+            >
+              <h3 className="text-xl font-semibold mb-2 text-gray-900 dark:text-white">
+                {idx + 1}. {step.title}
+              </h3>
+              <p className="text-gray-600 dark:text-gray-400">{step.description}</p>
+            </div>
+          ))}
         </section>
       </main>
 
-      <footer className="row-start-3 flex gap-6 flex-wrap items-center justify-center text-sm text-gray-600 dark:text-gray-400">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="#" // Replace with your "Features" link
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Features
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="#" // Replace with your "Pricing" link
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Pricing
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="#" // Replace with your "Contact Us" link
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Contact Us
-        </a>
+      {/* Footer */}
+      <footer className="flex flex-wrap justify-center gap-6 py-8 text-sm text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700">
+        <a href="#" className="hover:underline hover:underline-offset-4">Features</a>
+        <a href="#" className="hover:underline hover:underline-offset-4">Pricing</a>
+        <a href="#" className="hover:underline hover:underline-offset-4">Contact Us</a>
       </footer>
     </div>
   );

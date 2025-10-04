@@ -29,9 +29,7 @@ export default function LoginPage() {
       },
       {
         onRequest: () => setLoading(true),
-        onSuccess: () => {
-          router.push("/dashboard");
-        },
+        onSuccess: () => router.push("/dashboard"),
         onError: (ctx) => {
           setError(ctx.error.message);
           setLoading(false);
@@ -61,6 +59,7 @@ export default function LoginPage() {
 
         {/* Form */}
         <form onSubmit={handleLogin} className="space-y-5">
+          {/* Email Field */}
           <div>
             <label
               htmlFor="email"
@@ -79,6 +78,7 @@ export default function LoginPage() {
             />
           </div>
 
+          {/* Password Field */}
           <div>
             <label
               htmlFor="password"
@@ -104,22 +104,16 @@ export default function LoginPage() {
                 {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
               </button>
             </div>
-            <div className="text-right mt-2">
-              <a
-                href="/forgot-password"
-                className="text-blue-600 dark:text-blue-400 text-sm hover:underline"
-              >
-                Forgot password?
-              </a>
-            </div>
           </div>
 
+          {/* Error */}
           {error && (
             <p className="text-sm text-red-500 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 p-2 rounded-md">
               {error}
             </p>
           )}
 
+          {/* Submit Button */}
           <Button
             type="submit"
             disabled={loading}
@@ -137,6 +131,7 @@ export default function LoginPage() {
           </Button>
         </form>
 
+        {/* Footer */}
         <p className="mt-6 text-center text-sm text-slate-600 dark:text-slate-400">
           Don’t have an account?{" "}
           <a
