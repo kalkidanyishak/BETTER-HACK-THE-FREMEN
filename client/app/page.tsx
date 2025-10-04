@@ -1,4 +1,4 @@
-import Image from "next/image"; // Image import is still there, but not used
+import Link from "next/link"; // Import the Link component
 
 export default function Home() {
   return (
@@ -13,16 +13,18 @@ export default function Home() {
         </p>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row mt-6">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-600 text-white gap-2 hover:bg-blue-700 dark:hover:bg-blue-500 font-medium text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto"
-            href="#" // Replace with your "Get Started" link
-            rel="noopener noreferrer"
-          >
-            Get Started Free
-          </a>
+          <Link href="/dashboard" passHref legacyBehavior>
+            <a
+              className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-600 text-white gap-2 hover:bg-blue-700 dark:hover:bg-blue-500 font-medium text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto"
+              rel="noopener noreferrer"
+            >
+              Get Started Free
+            </a>
+          </Link>
+          {/* For external links or placeholder links, a regular <a> can still be used */}
           <a
             className="rounded-full border border-solid border-gray-300 dark:border-gray-700 transition-colors flex items-center justify-center hover:bg-gray-100 dark:hover:bg-gray-800 hover:border-transparent font-medium text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto"
-            href="/" // Replace with your "Learn More" link
+            href="#" // Replace with your "Learn More" link
             rel="noopener noreferrer"
           >
             Learn More
@@ -84,4 +86,4 @@ export default function Home() {
       </footer>
     </div>
   );
-} 
+}
