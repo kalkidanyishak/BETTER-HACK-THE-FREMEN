@@ -3,36 +3,38 @@
 
 import { DataTable } from "@/components/main/data-table";
 import { useDataTable } from "@/hooks/use-data-table";
-import { ColumnDef } from "@tanstack/react-table";
+import { tableColumns } from "@/lib/table-config";
+import { useQuery } from "@tanstack/react-query";
 
-type User = {
-  id: number;
-  name: string;
-  email: string;
-};
 
-const columns: ColumnDef<User>[] = [
-  { accessorKey: "id", header: "ID" },
-  { accessorKey: "name", header: "Name" },
-  { accessorKey: "email", header: "Email" },
-];
 
-const data: User[] = [
-  { id: 1, name: "Alice", email: "alice@mail.com" },
-  { id: 2, name: "Bob", email: "bob@mail.com" },
-  { id: 3, name: "Charlie", email: "charlie@mail.com" },
-  { id: 4, name: "David", email: "david@mail.com" },
-  { id: 5, name: "Eve", email: "eve@mail.com" },
-  { id: 6, name: "EveA", email: "eve@maSAil.com" },
-  { id: 7, name: "EveE", email: "eve@mSail.com" },
-];
 
 export default function UserPage() {
+
+  const { data, isError, isLoading } = useQuery({
+    queryKey: ['users'],
+    queryFn: async () => {
+      const res = await fetch('/api/users');
+      if (!res.ok) {
+        throw new Error('Network response was not ok');
+      }
+      return res.json();
+    }
+  })
+
   const { table, globalFilter, setGlobalFilter } = useDataTable<User>({
     data,
-    columns,
+    columns: tableColumns,
     pageSize: 5,
   });
+
+  if (isError) {
+    return <div>Error loading users.</div>
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>
+  }
 
   return (
     <div className="p-6">
