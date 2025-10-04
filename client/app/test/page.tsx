@@ -3,28 +3,20 @@
 
 import { DataTable } from "@/components/main/data-table";
 import { useDataTable } from "@/hooks/use-data-table";
-import { tableColumns } from "@/lib/table-config";
+import { api } from "@/lib/api";
+import { userColumns } from "@/lib/table-config";
 import { useQuery } from "@tanstack/react-query";
-
-
-
 
 export default function UserPage() {
 
   const { data, isError, isLoading } = useQuery({
     queryKey: ['users'],
-    queryFn: async () => {
-      const res = await fetch('/api/users');
-      if (!res.ok) {
-        throw new Error('Network response was not ok');
-      }
-      return res.json();
-    }
+    queryFn: () => api<User[]>('/users'),
   })
 
   const { table, globalFilter, setGlobalFilter } = useDataTable<User>({
-    data,
-    columns: tableColumns,
+    data: data || [],
+    columns: userColumns,
     pageSize: 5,
   });
 
@@ -47,3 +39,5 @@ export default function UserPage() {
     </div>
   );
 }
+
+

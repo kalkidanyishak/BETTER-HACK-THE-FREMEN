@@ -1,9 +1,6 @@
-import { BF } from 'better-fetch';
+import { createFetch } from '@better-fetch/fetch';
 
-// Example: create an API instance with a base URL
-const api = new BF({
-  baseURL: 'http://localhost:3001',
-  headers: {
-    'Content-Type': 'application/json',
-  },
+export const api = createFetch({
+  baseURL: 'http://localhost:3005',
+  throw: true, // Optional: throws errors instead of returning them
 });
