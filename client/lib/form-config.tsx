@@ -5,14 +5,14 @@ export const userFields: FormItem[] = [
   "user",
   {
     type: "text",
-    name: "username",
-    placeholder: "Enter username",
-    zodVal: z.string().min(3, "Username must be at least 3 characters"),
+    name: "name",
+    placeholder: "Enter name",
+    zodVal: z.string().min(3, "Name must be at least 3 characters"),
   },
   {
-    type: "password",
-    name: "password",
-    placeholder: "Enter password",
-    zodVal: z.string().min(6, "Password must be at least 6 characters"),
+    type: "email",
+    name: "email",
+    placeholder: "Enter email",
+    zodVal: z.string().min(6, "Email must be at least 6 characters"),
   }
 ];

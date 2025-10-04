@@ -1,13 +1,11 @@
 "use client"
 import React from "react";
-import { useForm, Controller } from "react-hook-form";
+import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem as ShadcnFormItem, FormLabel, FormMessage } from "@/components/ui/form";
-import { z } from "zod";
-
-import {  ZodType } from "zod";
+import { z, ZodType } from "zod";
 
 type FieldType = {
   type: 'text' | 'password' | 'email' | 'number';
@@ -18,31 +16,42 @@ type FieldType = {
 
 export type FormItem = 'user' | FieldType;
 
-
-
 interface CustomFormProps {
   fields: FormItem[];
   onSubmit: (data: any) => void;
+  /** Optional data to pre-populate the form fields. */
+  initialData?: Record<string, any>;
 }
 
-export function CustomForm({ fields, onSubmit }: CustomFormProps) {
+export function CustomForm({ fields, onSubmit, initialData }: CustomFormProps) {
   // Build Zod schema dynamically
   const shape = {} as Record<string, ZodType<any>>;
-
   fields.forEach(field => {
     if (typeof field !== "string") {
       shape[field.name] = field.zodVal;
     }
   });
-
   const schema = z.object(shape);
+
+  // Create a base object with empty strings for all fields
+  const baseDefaultValues = fields.reduce((acc, field) => {
+    if (typeof field !== "string") {
+      acc[field.name] = "";
+    }
+    return acc;
+  }, {} as Record<string, any>);
+
+  // Merge the base object with the provided initialData
+  // This ensures all fields are initialized, but initialData takes precedence.
+  const formDefaultValues = {
+    ...baseDefaultValues,
+    ...initialData,
+  };
 
   const form = useForm({
     resolver: zodResolver(schema),
-    defaultValues: fields.reduce((acc, field) => {
-      if (typeof field !== "string") acc[field.name] = "";
-      return acc;
-    }, {} as Record<string, any>)
+    // Use the merged default values
+    defaultValues: formDefaultValues,
   });
 
   return (
