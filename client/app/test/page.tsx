@@ -1,43 +1,26 @@
+// src/app/users/page.tsx (or wherever your user page is)
 "use client";
 
-
-import { DataTable } from "@/components/main/data-table";
-import { useDataTable } from "@/hooks/use-data-table";
-import { api } from "@/lib/api";
+import { GenericCrudPage } from "@/components/main/generic-crud";
+import { userFields } from "@/lib/form-config";
 import { userColumns } from "@/lib/table-config";
-import { useQuery } from "@tanstack/react-query";
 
-export default function UserPage() {
-
-  const { data, isError, isLoading } = useQuery({
-    queryKey: ['users'],
-    queryFn: () => api<User[]>('/users'),
-  })
-
-  const { table, globalFilter, setGlobalFilter } = useDataTable<User>({
-    data: data || [],
-    columns: userColumns,
-    pageSize: 5,
-  });
-
-  if (isError) {
-    return <div>Error loading users.</div>
-  }
-
-  if (isLoading) {
-    return <div>Loading...</div>
-  }
-
-  return (
-    <div className="p-6">
-      <h1 className="text-2xl font-semibold mb-4">Users</h1>
-      <DataTable
-        table={table}
-        globalFilter={globalFilter}
-        setGlobalFilter={setGlobalFilter}
-      />
-    </div>
-  );
+// Assuming you have a User type defined somewhere
+interface User {
+  id: number;
+  name: string;
+  email: string;
 }
 
-
+export default function UserPage() {
+  return (
+    <GenericCrudPage<User>
+      queryKey={['users']}
+      apiRoute="/users"
+      title="Users"
+      singularTitle="User"
+      tableConfig={userColumns}
+      formConfig={userFields}
+    />
+  );
+}

@@ -1,6 +1,5 @@
-import { createFetch } from '@better-fetch/fetch';
+import axios from 'axios';
 
-export const api = createFetch({
+export const api = axios.create({
   baseURL: 'http://localhost:3005',
-  throw: true, // Optional: throws errors instead of returning them
 });
