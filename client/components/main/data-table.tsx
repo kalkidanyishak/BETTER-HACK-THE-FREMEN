@@ -9,6 +9,7 @@ import { Button } from "@/components/ui/button";
 import { ChevronLeft, ChevronRight, SkipBack, SkipForward } from "lucide-react";
 import { clsx } from "clsx";
 import { title } from "process";
+import { useMemo } from "react";
 
 interface DataTableProps<TData> {
   table: TableType<TData>;
