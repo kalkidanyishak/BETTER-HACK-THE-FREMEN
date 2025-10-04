@@ -36,6 +36,7 @@ export function DataTable<TData>({
       {/* 🔍 Search Input */}
       {searchable && (  
         <div className="flex justify-center items-center">
+<<<<<<< HEAD
           <div className="relative max-w-md w-full">
             <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
             <Input
@@ -45,10 +46,19 @@ export function DataTable<TData>({
               className="w-full pl-10 pr-4 py-3 bg-background border-border rounded-lg shadow-sm focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             />
           </div>
+=======
+          <Input
+            value={globalFilter ?? ""}
+            onChange={(e) => setGlobalFilter(e.target.value)}
+            placeholder="Search all columns..."
+            className="max-w-sm p-4 mb-3"
+          />
+>>>>>>> b5e654d967b1cb3fe28f7cd668aa26d9e4cf565b
         </div>
       )}
 
       {/* 🔹 Table */}
+<<<<<<< HEAD
       <div className="rounded-xl border border-border shadow-sm overflow-hidden bg-card">
         <div className="overflow-x-auto">
           <table className="w-full min-w-max">
@@ -58,6 +68,43 @@ export function DataTable<TData>({
                   {hg.headers.map((header) => (
                     <th
                       key={header.id}
+=======
+      <div className="rounded-md border shadow-sm overflow-hidden">
+        <table className="w-full shadow-sm">
+          <thead className="bg-muted/50">
+            {table.getHeaderGroups().map((hg) => (
+              <tr key={hg.id}>
+                {hg.headers.map((header) => (
+                  <th
+                    key={header.id}
+                    className={clsx(
+                      "px-4 py-3 text-left font-medium text-sm text-muted-foreground border-b",
+                      header.id === "actions" && "max-w-[100px] w-[100px]"
+                    )}
+                  >
+                    {flexRender(
+                      header.column.columnDef.header,
+                      header.getContext()
+                    )}
+                  </th>
+                ))}
+              </tr>
+            ))}
+          </thead>
+          <tbody className="bg-card">
+            {table.getRowModel().rows.length > 0 ? (
+              table.getRowModel().rows.map((row, index) => (
+                <tr
+                  key={row.id}
+                  className={clsx(
+                    "border-b transition-colors hover:bg-muted/50",
+                    index % 2 === 0 ? "bg-background" : "bg-muted/10"
+                  )}
+                >
+                  {row.getVisibleCells().map((cell) => (
+                    <td
+                      key={cell.id}
+>>>>>>> b5e654d967b1cb3fe28f7cd668aa26d9e4cf565b
                       className={clsx(
                         "px-6 py-4 text-left font-semibold text-sm text-muted-foreground border-b border-border",
                         header.id === "actions" && "max-w-[100px] w-[100px]"
