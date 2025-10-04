@@ -38,7 +38,7 @@ export default function SignupPage() {
     );
 
     if (error) {
-      setError(error.message);
+      setError(error.message ?? "");
     }
     setLoading(false);
   };
