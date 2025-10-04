@@ -13,7 +13,7 @@ export default function Home() {
         </p>
 
         <div className="flex gap-4 items-center flex-col sm:flex-row mt-6">
-          <Link href="/dashboard" passHref legacyBehavior>
+          <Link href="/dashboard" passHref>
             <a
               className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-blue-600 text-white gap-2 hover:bg-blue-700 dark:hover:bg-blue-500 font-medium text-base sm:text-lg h-12 sm:h-14 px-6 sm:px-8 w-full sm:w-auto"
               rel="noopener noreferrer"

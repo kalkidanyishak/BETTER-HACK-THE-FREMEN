@@ -1,6 +1,6 @@
 "use client"
 import { MegaDialog } from "@/components/main/data-dialog";
-import { CustomForm, FormItem } from "@/components/main/data-form";
+import { CustomForm } from "@/components/main/data-form";
 import { Button } from "@/components/ui/button";
 import { userFields } from "@/lib/form-config";
 
