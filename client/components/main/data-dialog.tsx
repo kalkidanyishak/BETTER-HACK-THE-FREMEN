@@ -36,7 +36,7 @@ export function MegaDialog({
       {/* 3. Use Shadcn's DialogContent, which handles overlay, styling, and the 'X' button */}
       <DialogContent className={className}>
         <DialogHeader>
-          {title && <DialogTitle>{title}</DialogTitle>}
+          <DialogTitle>{title ? title : ""}</DialogTitle>
         </DialogHeader>
 
         {/* 4. The render prop pattern is identical. We call the children function
