@@ -1,4 +1,3 @@
-// components/DataTable.tsx
 "use client";
 
 import {
@@ -24,9 +23,17 @@ export function DataTable<TData>({
   setGlobalFilter,
   searchable = true,
 }: DataTableProps<TData>) {
+  const pageInfo = useMemo(
+    () => ({
+      current: table.getState().pagination.pageIndex + 1,
+      total: table.getPageCount(),
+    }),
+    [table]
+  );
+
   return (
-    <div className="space-y-4">
-      {/* 🔹 Search Bar */}
+    <div className="space-y-6">
+      {/* 🔍 Search Input */}
       {searchable && (
         <div className="flex justify-center items-center">
           <Input
@@ -93,7 +100,7 @@ export function DataTable<TData>({
                   colSpan={table.getAllColumns().length}
                   className="h-24 text-center py-4 text-muted-foreground"
                 >
-                  No results found.
+                  No results found 😕
                 </td>
               </tr>
             )}
