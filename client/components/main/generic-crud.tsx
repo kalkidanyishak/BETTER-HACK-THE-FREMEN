@@ -133,7 +133,7 @@ export function GenericCrudPage<TData extends { id: number | string }>({
   
   // 6. Initialize DataTable
   const { table, globalFilter, setGlobalFilter } = useDataTable<TData>({
-    data: data?.data?.data || [],
+    data: data?.data || [],
     columns,
     pageSize: 5,
   });

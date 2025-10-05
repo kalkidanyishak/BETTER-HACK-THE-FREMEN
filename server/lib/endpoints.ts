@@ -17,7 +17,7 @@ export function endpoint(modelName: string): Router {
   router.post("/", async (req: Request, res: Response) => {
     try {
       const created = await model.create({ data: req.body });
-      res.status(201).json({ data: created });
+      res.status(201).json(created);
     } catch (error: any) {
       if (error?.code === "P2002") {
         res.status(400).json({ error: "Unique constraint failed", meta: error.meta });
@@ -31,7 +31,7 @@ export function endpoint(modelName: string): Router {
   router.get("/", async (_req: Request, res: Response) => {
     try {
       const list = await model.findMany();
-      res.json({ data: list });
+      res.json(list);
     } catch (error: any) {
       res.status(500).json({ error: error?.message || String(error) });
     }
@@ -54,7 +54,7 @@ export function endpoint(modelName: string): Router {
     const id = Number(req.params.id);
     try {
       const updated = await model.update({ where: { id }, data: req.body });
-      res.json({ data: updated });
+      res.json(updated);
     } catch (error: any) {
       if (error?.code === "P2025") {
         res.status(404).json({ error: "Record not found" });
