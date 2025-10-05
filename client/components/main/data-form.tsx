@@ -8,13 +8,13 @@ import { Form, FormControl, FormField, FormItem as ShadcnFormItem, FormLabel, Fo
 import { z, ZodType } from "zod";
 
 type FieldType = {
-  type: 'text' | 'password' | 'email' | 'number';
+  type: 'text' | 'password' | 'email' | 'number' | 'textarea' | 'select' | 'tel' | 'date';
   name: string;
   placeholder?: string;
   zodVal: ZodType<any>;
 };
 
-export type FormItem = 'user' | FieldType;
+export type FormItem = string | FieldType;
 
 interface CustomFormProps {
   fields: FormItem[];

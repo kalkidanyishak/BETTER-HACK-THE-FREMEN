@@ -127,6 +127,9 @@ export function GenericCrudPage<TData extends { id: number | string }>({
   }), [formConfig, singularTitle, update, remove]); // Dependencies for useMemo
 
   const columns = useMemo(() => [...tableConfig, actionsColumn], [tableConfig, actionsColumn]);
+  if(data){
+    console.log(data.data, 'eyeyeye');
+  }
   
   // 6. Initialize DataTable
   const { table, globalFilter, setGlobalFilter } = useDataTable<TData>({
