@@ -19,5 +19,6 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-   plugins: [nextCookies()] 
+   plugins: [nextCookies()],
+   trustedOrigins:["https://client-zeta-rouge.vercel.app", "http://localhost:3000"]
 });
