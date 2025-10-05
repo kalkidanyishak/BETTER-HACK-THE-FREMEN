@@ -7,10 +7,12 @@
     "strict": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
-    "outDir": "./dist",
-    "rootDir": ".", // Good practice: tells TS this is the root of your source files
-    "baseUrl": "."
+    "outDir": "dist",
+    "baseUrl": ".",
+    "rootDir": ".",
+    // Add this line below
+    "allowImportingTsExtensions": true
   },
-  "include": ["**/*.ts", "**/*.json"], // <-- THIS IS THE KEY CHANGE
-  "exclude": ["dist", "node_modules"] // Also good practice to exclude node_modules
+  "include": ["**/*.ts"],
+  "exclude": ["dist", "node_modules"]
 }
