@@ -109,6 +109,7 @@ export function DataTable<TData>({
         </table>
       </div>
 
+
       {/* 🔹 Pagination */}
       {table.getPageCount() > 1 && (
         <div className="flex items-center justify-between">
