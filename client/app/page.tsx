@@ -1,102 +1,104 @@
-import Image from "next/image";
+"use client";
+
+import { Button } from "@/components/ui/button"; // ShadCN Button
+import { useRouter } from "next/navigation";
 
 export default function Home() {
-  return (
-    <div className="font-sans grid grid-rows-[20px_1fr_20px] items-center justify-items-center min-h-screen p-8 pb-20 gap-16 sm:p-20">
-      <main className="flex flex-col gap-[32px] row-start-2 items-center sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={180}
-          height={38}
-          priority
-        />
-        <ol className="font-mono list-inside list-decimal text-sm/6 text-center sm:text-left">
-          <li className="mb-2 tracking-[-.01em]">
-            Get started by editing{" "}
-            <code className="bg-black/[.05] dark:bg-white/[.06] font-mono font-semibold px-1 py-0.5 rounded">
-              app/page.tsx
-            </code>
-            .
-          </li>
-          <li className="tracking-[-.01em]">
-            Save and see your changes instantly.
-          </li>
-        </ol>
+  const router = useRouter();
 
-        <div className="flex gap-4 items-center flex-col sm:flex-row">
-          <a
-            className="rounded-full border border-solid border-transparent transition-colors flex items-center justify-center bg-foreground text-background gap-2 hover:bg-[#383838] dark:hover:bg-[#ccc] font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 sm:w-auto"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+  const steps = [
+    {
+      title: "Define Your Needs",
+      description:
+        "Tell us about your business and the ERP modules you require (HR, Finance, Inventory, CRM, etc.).",
+    },
+    {
+      title: "Customize & Configure",
+      description:
+        "Tailor fields, workflows, and integrations to perfectly match your operations.",
+    },
+    {
+      title: "Deploy Your ERP",
+      description:
+        "Generate and deploy your bespoke ERP solution with minimal effort.",
+    },
+  ];
+
+  return (
+    <div className="__variable_fb8f2c __variable_f910ec bg-background font-sans relative min-h-screen flex flex-col justify-between transition-colors duration-500">
+      
+      {/* Hero Section */}
+      <main className="flex flex-col items-center text-center px-6 sm:px-20 pt-32 gap-12">
+        <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-gray-900 dark:text-white leading-tight">
+          AutoERP: Dynamic ERP Scaffolder
+        </h1>
+        <p className="text-lg sm:text-xl md:text-2xl text-gray-700 dark:text-gray-300 max-w-3xl">
+          Quickly generate customized ERP modules like HR, Finance, and Inventory based on your unique business needs.
+          Save time, reduce complexity, and empower small and medium businesses with powerful ERP solutions.
+        </p>
+
+        {/* Buttons */}
+        <div className="flex flex-col sm:flex-row gap-4 justify-center mt-6 w-full sm:w-auto">
+          <Button
+            onClick={() => router.push("/dashboard")}
+            className="w-full sm:w-auto px-10 py-4 bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 text-white font-semibold shadow-xl hover:shadow-2xl rounded-xl transform transition-all hover:-translate-y-1 hover:scale-105"
           >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={20}
-              height={20}
-            />
-            Deploy now
-          </a>
-          <a
-            className="rounded-full border border-solid border-black/[.08] dark:border-white/[.145] transition-colors flex items-center justify-center hover:bg-[#f2f2f2] dark:hover:bg-[#1a1a1a] hover:border-transparent font-medium text-sm sm:text-base h-10 sm:h-12 px-4 sm:px-5 w-full sm:w-auto md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
+            Get Started Free
+          </Button>
+
+          <Button
+            variant="outline"
+            onClick={() => console.log("Learn more clicked")}
+            className="w-full sm:w-auto px-10 py-4 border-gray-300 dark:border-gray-700 text-gray-900 dark:text-gray-100 hover:bg-gray-100 dark:hover:bg-gray-800 shadow hover:shadow-md rounded-xl transform transition-all hover:-translate-y-1 hover:scale-105"
           >
-            Read our docs
-          </a>
+            Learn More
+          </Button>
         </div>
+
+        {/* How it Works Cards */}
+        <section className="w-full max-w-6xl mt-16 grid sm:grid-cols-3 gap-8">
+          {steps.map((step, idx) => (
+            <div
+              key={idx}
+              className="relative bg-white/70 dark:bg-gray-900/70 backdrop-blur-md rounded-3xl p-8 shadow-lg hover:shadow-2xl transition-all transform hover:-translate-y-2 hover:scale-105 border border-transparent hover:border-gradient-to-r from-blue-400 to-indigo-500"
+            >
+              {/* Number Circle */}
+              <div className="flex items-center justify-center w-16 h-16 rounded-full bg-gradient-to-r from-blue-500 to-indigo-500 text-white font-bold text-xl mb-5 shadow-lg">
+                {idx + 1}
+              </div>
+
+              {/* Step Title */}
+              <h3 className="text-2xl font-semibold mb-3 text-gray-900 dark:text-white">
+                {step.title}
+              </h3>
+
+              {/* Step Description */}
+              <p className="text-gray-700 dark:text-gray-300 leading-relaxed mb-5">{step.description}</p>
+
+              {/* Floating Icon */}
+              <div className="absolute top-5 right-5 w-12 h-12 rounded-full bg-blue-100 dark:bg-indigo-700 flex items-center justify-center text-blue-500 dark:text-indigo-100 text-xl font-bold shadow-md animate-pulse">
+                💡
+              </div>
+
+              {/* CTA inside card */}
+              <Button
+                variant="outline"
+                size="sm"
+                className="mt-4 w-full sm:w-auto px-6 py-2 border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white transition-colors rounded-lg shadow-sm"
+                onClick={() => console.log(`Clicked on step ${idx + 1}`)}
+              >
+                Learn More
+              </Button>
+            </div>
+          ))}
+        </section>
       </main>
-      <footer className="row-start-3 flex gap-[24px] flex-wrap items-center justify-center">
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          className="flex items-center gap-2 hover:underline hover:underline-offset-4"
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
+
+      {/* Footer */}
+      <footer className="flex flex-wrap justify-center gap-6 py-8 text-sm md:text-base text-gray-600 dark:text-gray-400 border-t border-gray-200 dark:border-gray-700 bg-background transition-colors duration-500">
+        <a href="#" className="hover:underline hover:underline-offset-4 transition-colors duration-300">Features</a>
+        <a href="#" className="hover:underline hover:underline-offset-4 transition-colors duration-300">Pricing</a>
+        <a href="#" className="hover:underline hover:underline-offset-4 transition-colors duration-300">Contact Us</a>
       </footer>
     </div>
   );

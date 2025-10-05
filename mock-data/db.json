@@ -1,0 +1,34 @@
+{
+  "users": [
+    {
+      "id": "3",
+      "name": "Charlie",
+      "email": "charlie@mail.com"
+    },
+    {
+      "id": "4",
+      "name": "David",
+      "email": "david@mail.com"
+    },
+    {
+      "id": "5",
+      "name": "Eve",
+      "email": "eve@mail.com"
+    },
+    {
+      "id": "6",
+      "name": "EveA",
+      "email": "eve@maSAil.com"
+    },
+    {
+      "id": "23dd",
+      "name": "kibadu",
+      "email": "badokis@gmail.com"
+    },
+    {
+      "id": "62b3",
+      "name": "natnael",
+      "email": "natnael@gmail.com"
+    }
+  ]
+}

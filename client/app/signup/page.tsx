@@ -1,14 +1,16 @@
-// app/signup/page.tsx
 "use client";
 
 import { useState } from "react";
 import { authClient } from "@/lib/auth-client";
 import { useRouter } from "next/navigation";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import Link from "next/link";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [name, setName] = useState(""); // Optional display name
+  const [name, setName] = useState("");
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
   const router = useRouter();
@@ -18,18 +20,11 @@ export default function SignupPage() {
     setLoading(true);
     setError("");
 
-    const { data, error } = await authClient.signUp.email(
-      {
-        email,
-        password,
-        name,
-        callbackURL: "/dashboard", // Redirect after verification (if enabled)
-      },
+    const { error } = await authClient.signUp.email(
+      { email, password, name, callbackURL: "/dashboard" },
       {
         onRequest: () => setLoading(true),
-        onSuccess: () => {
-          router.push("/dashboard");
-        },
+        onSuccess: () => router.push("/dashboard"),
         onError: (ctx) => {
           setError(ctx.error.message);
           setLoading(false);
@@ -37,68 +32,87 @@ export default function SignupPage() {
       }
     );
 
-    if (error) {
-      setError(error.message);
-    }
+    if (error) setError(error.message ?? "");
     setLoading(false);
   };
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-6">Sign Up</h1>
-      <form onSubmit={handleSignup}>
-        <div className="mb-4">
-          <label htmlFor="name" className="block text-sm font-medium mb-2">
-            Name (Optional)
-          </label>
-          <input
-            type="text"
-            id="name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            className="w-full p-2 border rounded-md"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="email" className="block text-sm font-medium mb-2">
-            Email
-          </label>
-          <input
-            type="email"
-            id="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-            className="w-full p-2 border rounded-md"
-          />
-        </div>
-        <div className="mb-4">
-          <label htmlFor="password" className="block text-sm font-medium mb-2">
-            Password
-          </label>
-          <input
-            type="password"
-            id="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-            minLength={8}
-            className="w-full p-2 border rounded-md"
-          />
-        </div>
-        {error && <p className="text-red-500 mb-4">{error}</p>}
-        <button
-          type="submit"
-          disabled={loading}
-          className="w-full bg-blue-500 text-white p-2 rounded-md disabled:opacity-50"
-        >
-          {loading ? "Signing Up..." : "Sign Up"}
-        </button>
-      </form>
-      <p className="mt-4 text-center">
-        Already have an account?{" "}
-        <a href="/login" className="text-blue-500">Log in</a>
-      </p>
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 transition-colors duration-500">
+      <div className="w-full max-w-md bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-8">
+        <h1 className="text-3xl font-semibold text-center mb-6 bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
+          Create Your Account
+        </h1>
+
+        <form onSubmit={handleSignup} className="space-y-4">
+          <div>
+            <label htmlFor="name" className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              Name (optional)
+            </label>
+            <Input
+              id="name"
+              value={name}
+              onChange={(e) => setName(e.target.value)}
+              placeholder="Enter your name"
+              className="mt-1"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="email" className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              Email
+            </label>
+            <Input
+              id="email"
+              type="email"
+              required
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="you@example.com"
+              className="mt-1"
+            />
+          </div>
+
+          <div>
+            <label htmlFor="password" className="text-sm font-medium text-slate-700 dark:text-slate-300">
+              Password
+            </label>
+            <Input
+              id="password"
+              type="password"
+              required
+              minLength={8}
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="********"
+              className="mt-1"
+            />
+          </div>
+
+          {error && (
+            <p className="text-sm text-red-500 bg-red-50 dark:bg-red-950/30 border border-red-200 dark:border-red-800 p-2 rounded-md">
+              {error}
+            </p>
+          )}
+
+          <Button
+            type="submit"
+            disabled={loading}
+            className="w-full bg-gradient-to-r from-blue-600 to-indigo-500 hover:from-blue-700 hover:to-indigo-600 text-white font-medium rounded-md py-2 transition-all shadow-md disabled:opacity-60"
+          >
+            {loading ? "Signing up..." : "Sign Up"}
+          </Button>
+        </form>
+
+        <p className="mt-6 text-center text-sm text-slate-600 dark:text-slate-400">
+          Already have an account?{" "}
+          <Link
+            href="/login"
+            className="font-medium text-blue-600 hover:text-indigo-500 dark:text-blue-400"
+          >
+            Log in
+          </Link>
+        </p>
+      </div>
     </div>
   );
 }
