@@ -1,4 +1,3 @@
-// app/redeploy/page.tsx
 'use client';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
@@ -17,10 +16,10 @@ export default function RedeployPage() {
       return res.json();
     },
     onSuccess: (data) => {
-      setStatus(`Success! ${data.deploymentUrl}`);
+      setStatus(`Success! Deployment triggered: ${data.deploymentUrl}`);
       queryClient.invalidateQueries(); // Optional: Refresh any queries
     },
-    onError: () => setStatus('Error: Check console.'),
+    onError: () => setStatus('Error: Check console for details.'),
   });
 
   const handleRedeploy = () => {

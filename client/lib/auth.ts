@@ -35,7 +35,7 @@ export const auth = betterAuth({
       // Optional: Set "moderator" as an admin-level role if it needs full access
       adminRoles: ["admin", "moderator"],
       // Keep your existing adminUserIds if needed
-      adminUserIds: ["FJC8uLSzP91xiEWKcV68PecN1k5zM7Za"],
+      adminUserIds: ["FJC8uLSzP91xiEWKcV68PecN1k5zM7Za", "kUGDWFDhTQM3xWK5AiH1QD8nxrm5tFHe"],
     }),
   ],
   trustedOrigins: [
