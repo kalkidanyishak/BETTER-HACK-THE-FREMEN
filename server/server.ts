@@ -9,9 +9,7 @@ app.use(express.json());
 
 const PORT = process.env.PORT || 3000;
 
-app.get('/health', (req: Request, res: Response) => {
-  res.status(200).send('OK');
-});
+
 
 // Inventory
 app.use("/api/products", endpoint("product"));
@@ -36,6 +34,10 @@ app.use("/api/opportunities", endpoint("opportunity"));
 app.use("/api/interactions", endpoint("interaction"));
 
 app.get("/", (_req, res) => res.json({ message: "AutoERP API running" }));
+
+app.get('/health', (req: Request, res: Response) => { // <-- TS thinks 'Response' is the built-in web type
+  res.status(200).send('OK'); // ERROR: .status is a number here, not a function
+});
 
 app.listen(PORT, () => {
   console.log(`🚀 AutoERP Server running on http://localhost:${PORT}`);
