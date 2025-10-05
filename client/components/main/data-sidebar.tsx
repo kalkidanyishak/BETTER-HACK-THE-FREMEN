@@ -1,15 +1,28 @@
-"use client"
+"use client";
 
-import * as React from "react"
-import { Home, Users, Settings, LogOut, Menu } from "lucide-react"
-import { Button } from "@/components/ui/button"
-import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
-import { ScrollArea } from "@/components/ui/scroll-area"
-import { cn } from "@/lib/utils"
+import * as React from "react";
+import { Home, LogOut, Menu, Settings, Users } from "lucide-react";
+import { Button } from "@/components/ui/button";
+import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
+import { ScrollArea } from "@/components/ui/scroll-area";
+import { cn } from "@/lib/utils";
 
-export function Sidebar() {
+export interface SidebarItem {
+  icon: React.ElementType;
+  label: string;
+  href: string;
+}
+
+interface SidebarProps {
+  items: SidebarItem[];
+  className?: string;
+}
+
+export default function SidebarReuse({ items, className }: SidebarProps) {
+
+
   return (
-    <div className="flex">
+    <div className={cn("flex", className)}>
       {/* Mobile toggle */}
       <Sheet>
         <SheetTrigger asChild>
@@ -18,26 +31,19 @@ export function Sidebar() {
           </Button>
         </SheetTrigger>
         <SheetContent side="left" className="p-0">
-          <SidebarNav />
+          <SidebarNav items={items} />
         </SheetContent>
       </Sheet>
 
       {/* Desktop sidebar */}
       <div className="hidden md:flex w-64 h-screen border-r bg-muted/40">
-        <SidebarNav />
+        <SidebarNav items={items} />
       </div>
     </div>
-  )
+  );
 }
 
-function SidebarNav() {
-  const items = [
-    { icon: Home, label: "Dashboard", href: "/" },
-    { icon: Users, label: "HR", href: "/hr" },
-    { icon: Settings, label: "IMS", href: "/inventory" },
-    { icon: LogOut, label: "Logout", href: "/logout" },
-  ]
-
+function SidebarNav({ items }: { items: SidebarItem[] }) {
   return (
     <ScrollArea className="flex-1">
       <div className="flex flex-col gap-2 p-4">
@@ -55,5 +61,5 @@ function SidebarNav() {
         ))}
       </div>
     </ScrollArea>
-  )
+  );
 }

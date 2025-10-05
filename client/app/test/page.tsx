@@ -6,19 +6,14 @@ import { userFields } from "@/lib/form-config";
 import { userColumns } from "@/lib/table-config";
 
 // Assuming you have a User type defined somewhere
-interface User {
-  id: number;
-  name: string;
-  email: string;
-}
 
-export default function UserPage() {
+export default function CustomerPage() {
   return (
     <GenericCrudPage<User>
-      queryKey={['users']}
-      apiRoute="/users"
-      title="Users"
-      singularTitle="User"
+      queryKey={['customers']}
+      apiRoute="/customers"
+      title="Customers"
+      singularTitle="Customer"
       tableConfig={userColumns}
       formConfig={userFields}
     />
