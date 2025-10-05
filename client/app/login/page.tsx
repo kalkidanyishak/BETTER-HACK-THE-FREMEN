@@ -6,6 +6,7 @@ import { authClient } from "@/lib/auth-client";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Eye, EyeOff, Loader2, LogIn } from "lucide-react";
+import Image from "next/image";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -45,16 +46,30 @@ export default function LoginPage() {
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 transition-colors duration-500">
       <div className="w-full max-w-md bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-8">
         {/* Header */}
-        <div className="text-center mb-8">
+        <div className="text-center mb-6">
           <div className="flex items-center justify-center gap-2 mb-2">
             <LogIn className="w-6 h-6 text-blue-600 dark:text-blue-400" />
             <h1 className="text-3xl font-semibold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
               Welcome Back
             </h1>
           </div>
-          <p className="text-gray-600 dark:text-gray-400 text-sm">
+          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
             Log in to continue to your dashboard
           </p>
+
+          {/* Image (styled with frame and enhanced shadow, no padding, more curved) */}
+          <div className="flex justify-center mb-4">
+            <div className="bg-white/70 dark:bg-slate-800/60 rounded-3xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm transition-all hover:shadow-xl hover:scale-105">
+              <Image
+                src="/autoerp.png"
+                alt="AutoERP Logo"
+                width={200}
+                height={120}
+                className="rounded-3xl object-contain drop-shadow-md"
+                priority
+              />
+            </div>
+          </div>
         </div>
 
         {/* Form */}

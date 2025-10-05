@@ -6,6 +6,7 @@ import { useRouter } from "next/navigation";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import Link from "next/link";
+import Image from "next/image";
 
 export default function SignupPage() {
   const [email, setEmail] = useState("");
@@ -39,9 +40,29 @@ export default function SignupPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 via-slate-100 to-slate-200 dark:from-slate-950 dark:via-slate-900 dark:to-slate-800 transition-colors duration-500">
       <div className="w-full max-w-md bg-white/80 dark:bg-slate-900/80 backdrop-blur-md border border-slate-200 dark:border-slate-700 rounded-2xl shadow-xl p-8">
-        <h1 className="text-3xl font-semibold text-center mb-6 bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent">
-          Create Your Account
-        </h1>
+        {/* Header */}
+        <div className="text-center mb-6">
+          <h1 className="text-3xl font-semibold bg-gradient-to-r from-blue-600 to-indigo-500 bg-clip-text text-transparent mb-2">
+            Create Your Account
+          </h1>
+          <p className="text-gray-600 dark:text-gray-400 text-sm mb-4">
+            Sign up to get started with your dashboard
+          </p>
+
+          {/* Image (styled with frame and enhanced shadow, no padding, more curved) */}
+          <div className="flex justify-center">
+            <div className="bg-white/70 dark:bg-slate-800/60 rounded-3xl shadow-lg border border-slate-200/50 dark:border-slate-700/50 backdrop-blur-sm transition-all hover:shadow-xl hover:scale-105">
+              <Image
+                src="/autoerp.png"
+                alt="AutoERP Logo"
+                width={200}
+                height={120}
+                className="rounded-3xl object-contain drop-shadow-md"
+                priority
+              />
+            </div>
+          </div>
+        </div>
 
         <form onSubmit={handleSignup} className="space-y-4">
           <div>
@@ -53,7 +74,7 @@ export default function SignupPage() {
               value={name}
               onChange={(e) => setName(e.target.value)}
               placeholder="Enter your name"
-              className="mt-1"
+              className="mt-1 bg-white/70 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
             />
           </div>
 
@@ -68,7 +89,7 @@ export default function SignupPage() {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               placeholder="you@example.com"
-              className="mt-1"
+              className="mt-1 bg-white/70 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
             />
           </div>
 
@@ -84,7 +105,7 @@ export default function SignupPage() {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               placeholder="********"
-              className="mt-1"
+              className="mt-1 bg-white/70 dark:bg-slate-800/40 border border-slate-300 dark:border-slate-700 text-gray-900 dark:text-gray-100 placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
             />
           </div>
 
