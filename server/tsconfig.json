@@ -1,6 +1,6 @@
 {
   "compilerOptions": {
-    "rootDir": "./src",
+    "rootDir": ".",
     "outDir": "./dist",
     "module": "commonjs",
     "target": "ES2020",
@@ -12,8 +12,6 @@
     "sourceMap": true,
     "declaration": false,
     "strict": false,
-    "jsx": "preserve",
-    "isolatedModules": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "allowJs": true,
