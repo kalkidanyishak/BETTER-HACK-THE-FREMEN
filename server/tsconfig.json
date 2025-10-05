@@ -8,11 +8,8 @@
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "outDir": "dist",
-    "baseUrl": ".",
-    "rootDir": ".",
-    // Add this line below
-    "allowImportingTsExtensions": true
+    "baseUrl": "."
   },
-  "include": ["**/*.ts"],
+  "include": ["**/*.ts", "**/*.tsx"],
   "exclude": ["dist", "node_modules"]
 }
