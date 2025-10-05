@@ -1,11 +1,6 @@
 {
   "users": [
     {
-      "name": "Bob in the wonder land",
-      "email": "bob@mail.com",
-      "id": "2"
-    },
-    {
       "id": "3",
       "name": "Charlie",
       "email": "charlie@mail.com"
