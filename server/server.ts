@@ -1,7 +1,7 @@
 // src/core/server.ts
 import express from "express";
 import cors from "cors";
-import { endpoint } from "./lib/endpoints.ts";
+import { endpoint } from "./lib/endpoints";
 import {
   getInventoryAnalytics,
   getInventoryDashboard,
@@ -9,7 +9,7 @@ import {
   getHRDashboard,
   getEmployeeStats,
   getDepartmentOverview
-} from "./lib/customEndpoints.ts";
+} from "./lib/customEndpoints";
 
 const app = express();
 app.use(cors());
