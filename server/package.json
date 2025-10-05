@@ -3,6 +3,7 @@
   "version": "1.0.0",
   "description": "AutoERP — BetterHack 2025- The FREMEN",
   "main": "server.ts",
+  "type": "module",
   "scripts": {
     "build": "npx prisma generate && tsc",
     "dev": "nodemon server.ts",

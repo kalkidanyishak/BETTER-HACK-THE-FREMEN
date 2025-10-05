@@ -183,7 +183,6 @@ model Contact {
   phone      String?
   customer   Customer @relation(fields: [customerId], references: [id])
 
-  // ✅ fix: add this line to complete the relation
   interactions Interaction[]
 }
 
