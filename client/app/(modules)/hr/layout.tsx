@@ -1,6 +1,6 @@
 "use client"
 import SidebarReuse from "@/components/main/data-sidebar";
-import { Users, Building, Briefcase, CalendarCheck, Plane, Wallet } from "lucide-react";
+import { Users, Building, Briefcase, CalendarCheck, Plane, Wallet, Home } from "lucide-react";
 import React from "react"
 
 
@@ -13,6 +13,7 @@ export default function HRLayout({
 
 
         const sidebarItems = [
+                { icon: Home, label: "Home", href: "/dashboard" },
                 { icon: Users, label: "Employees", href: "/hr/employee" },
                 { icon: Building, label: "Departments", href: "/hr/department" },
                 { icon: Briefcase, label: "Positions", href: "/hr/positions" },

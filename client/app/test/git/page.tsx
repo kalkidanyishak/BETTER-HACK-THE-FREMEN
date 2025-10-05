@@ -1,14 +1,15 @@
 // app/page.tsx
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import {
   useQuery,
   useMutation,
   useQueryClient,
-  QueryClient,
-  QueryClientProvider,
 } from '@tanstack/react-query';
+import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
+import { vscDarkPlus } from 'react-syntax-highlighter/dist/esm/styles/prism';
+
 
 // Our API endpoints
 const API_ENDPOINT_GET = '/api/get-table-config';
@@ -23,7 +24,6 @@ interface FileData {
 async function fetchFileFromApi(path: string): Promise<FileData> {
   if (!path) throw new Error("File path cannot be empty.");
   
-  // Append path as a query parameter. encodeURIComponent is crucial for safety.
   const res = await fetch(`${API_ENDPOINT_GET}?path=${encodeURIComponent(path)}`);
   const data = await res.json();
 
@@ -33,12 +33,38 @@ async function fetchFileFromApi(path: string): Promise<FileData> {
   return data;
 }
 
+// Helper function to determine the language for syntax highlighting
+const getLanguageFromPath = (path: string) => {
+  const extension = path.split('.').pop()?.toLowerCase();
+  switch (extension) {
+    case 'tsx':
+    case 'ts':
+      return 'typescript';
+    case 'js':
+    case 'jsx':
+      return 'javascript';
+    case 'json':
+      return 'json';
+    case 'css':
+      return 'css';
+    case 'scss':
+      return 'scss';
+    case 'html':
+      return 'html';
+    case 'md':
+      return 'markdown';
+    default:
+      return 'plaintext';
+  }
+};
+
+
 // The main component with all the UI and logic
 export default function EditorComponent() {
-  // State for the path input and the content textarea
   const [filePath, setFilePath] = useState('client/lib/table-config.tsx');
   const [textareaValue, setTextareaValue] = useState('');
   const [mode, setMode] = useState<'full' | 'patch'>('full');
+  const [isEditing, setIsEditing] = useState(false);
   const queryClient = useQueryClient();
 
   // 1. useQuery is now dynamic
@@ -46,13 +72,13 @@ export default function EditorComponent() {
     data: fileData,
     error,
     isError,
-    isFetching, // Use isFetching for loading state as it covers refetches
-    refetch,   // We'll trigger the fetch manually
+    isFetching,
+    refetch,
   } = useQuery<FileData, Error>({
-    queryKey: ['githubFileContent', filePath], // The key now includes the path
+    queryKey: ['githubFileContent', filePath],
     queryFn: () => fetchFileFromApi(filePath),
-    enabled: false, // Important: This prevents the query from running automatically
-    retry: false, // Don't retry automatically on failure
+    enabled: false,
+    retry: false,
   });
 
   // 2. useMutation now needs to accept the path
@@ -61,7 +87,7 @@ export default function EditorComponent() {
       const res = await fetch(API_ENDPOINT_POST, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(variables), // Send the whole variables object
+        body: JSON.stringify(variables),
       });
       const result = await res.json();
       if (!res.ok || !result.success) {
@@ -71,8 +97,8 @@ export default function EditorComponent() {
     },
     onSuccess: (data) => {
       alert(data.message);
-      // Invalidate the query for the specific file that was updated
       queryClient.invalidateQueries({ queryKey: ['githubFileContent', filePath] });
+      setIsEditing(false);
     },
     onError: (error: Error) => {
       alert(`Update failed: ${error.message}`);
@@ -83,15 +109,17 @@ export default function EditorComponent() {
   useEffect(() => {
     if (fileData?.content) {
       setTextareaValue(fileData.content);
-      setMode('full'); // Reset to full mode when a new file is loaded
+      setMode('full');
+      setIsEditing(false);
     } else {
-      setTextareaValue(''); // Clear textarea if fetch fails or no file is loaded
+      setTextareaValue('');
+      setIsEditing(true);
     }
   }, [fileData]);
   
   const handleLoadFile = () => {
     if (filePath.trim()) {
-      refetch(); // Manually trigger the fetch for the current filePath
+      refetch();
     } else {
       alert("Please enter a file path.");
     }
@@ -111,8 +139,19 @@ export default function EditorComponent() {
       ? { content: textareaValue }
       : { patch: textareaValue };
     
-    // Pass the file path along with the content/patch
     updateFileMutation.mutate({ path: filePath, ...body });
+  };
+  
+  const codeLanguage = useMemo(() => getLanguageFromPath(filePath), [filePath]);
+
+  const editorStyles = {
+    width: '100%',
+    fontFamily: 'monospace',
+    fontSize: '14px',
+    border: '1px solid #ccc',
+    padding: '1rem',
+    boxSizing: 'border-box' as const,
+    minHeight: '400px',
   };
 
   return (
@@ -133,30 +172,52 @@ export default function EditorComponent() {
       </div>
 
       {isError && <p style={{ color: 'red' }}>Error: {error.message}</p>}
+      
+      <div style={{ position: 'relative' }}>
+        {fileData && !isEditing && (
+          <button
+            onClick={() => setIsEditing(true)}
+            style={{ position: 'absolute', top: '10px', right: '10px', zIndex: 1 }}
+          >
+            Edit
+          </button>
+        )}
 
-      <div style={{ margin: '1rem 0' }}>
-        <label><input type="radio" value="full" checked={mode === 'full'} onChange={() => setMode('full')} /> Full Overwrite</label>
-        <label style={{ marginLeft: '1.5rem' }}><input type="radio" value="patch" checked={mode === 'patch'} onChange={() => setMode('patch')} /> Simple Patch</label>
+        {isEditing && (
+            <div style={{ margin: '1rem 0' }}>
+              <label><input type="radio" value="full" checked={mode === 'full'} onChange={() => setMode('full')} /> Full Overwrite</label>
+              {/* THIS IS THE FIXED LINE */}
+              <label style={{ marginLeft: '1.5rem' }}><input type="radio" value="patch" checked={mode === 'patch'} onChange={() => setMode('patch')} /> Simple Patch</label>
+            </div>
+        )}
+
+        {isEditing ? (
+          <textarea
+            value={textareaValue}
+            onChange={(e) => setTextareaValue(e.target.value)}
+            placeholder={fileData ? (mode === 'full' ? "Full file content..." : "e.g., replace: old text with new text") : "Enter content for a new file..."}
+            style={editorStyles}
+            disabled={isFetching}
+          />
+        ) : (
+          <SyntaxHighlighter
+            language={codeLanguage}
+            style={vscDarkPlus}
+            customStyle={editorStyles}
+            showLineNumbers
+          >
+            {fileData ? textareaValue : "Load a file to see its content here..."}
+          </SyntaxHighlighter>
+        )}
       </div>
-
-      <textarea
-        value={textareaValue}
-        onChange={(e) => setTextareaValue(e.target.value)}
-        rows={25}
-        placeholder={fileData ? (mode === 'full' ? "Full file content..." : "e.g., replace: old text with new text") : "Load a file to see its content here..."}
-        style={{ width: '100%', fontFamily: 'monospace', fontSize: '14px', border: '1px solid #ccc', padding: '0.5rem' }}
-        disabled={!fileData || isFetching}
-      />
 
       <button
         onClick={handleSubmit}
-        disabled={!fileData || updateFileMutation.isPending || isFetching}
-        style={{ marginTop: '1rem', padding: '0.75rem 1.5rem', cursor: !fileData ? 'not-allowed' : 'pointer' }}
+        disabled={!isEditing || updateFileMutation.isPending || isFetching}
+        style={{ marginTop: '1rem', padding: '0.75rem 1.5rem', cursor: !isEditing ? 'not-allowed' : 'pointer' }}
       >
         {updateFileMutation.isPending ? 'Updating...' : 'Update File on GitHub'}
       </button>
     </div>
   );
 }
-
-// QueryClientProvider setup remains the same
