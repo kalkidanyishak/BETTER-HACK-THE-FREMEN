@@ -1,7 +1,7 @@
 // src/core/server.ts
 import express from "express";
 import cors from "cors";
-import { endpoint } from "./lib/endpoints";
+import { endpoint } from "./lib/endpoints.ts";
 import {
   getInventoryAnalytics,
   getInventoryDashboard,
@@ -9,7 +9,7 @@ import {
   getHRDashboard,
   getEmployeeStats,
   getDepartmentOverview
-} from "./lib/customEndpoints";
+} from "./lib/customEndpoints.ts";
 
 const app = express();
 app.use(cors());
@@ -39,7 +39,31 @@ app.use("/api/contacts", endpoint("contact"));
 app.use("/api/opportunities", endpoint("opportunity"));
 app.use("/api/interactions", endpoint("interaction"));
 
-app.get("/", (_req, res) => res.json({ message: "AutoERP API running" }));
+// Custom Analytics Endpoints
+/* ===================== INVENTORY ROUTES ===================== */
+app.get("/api/inventory/analytics", getInventoryAnalytics);
+app.get("/api/inventory/dashboard", getInventoryDashboard);
+app.get("/api/inventory/alerts/low-stock", getLowStockAlerts);
+
+/* ===================== HR ROUTES ===================== */
+app.get("/api/hr/dashboard", getHRDashboard);
+app.get("/api/hr/employees/:id/stats", getEmployeeStats);
+app.get("/api/hr/departments/:id/overview", getDepartmentOverview);
+
+// Health Check
+app.get("/", (_req, res) => res.json({ 
+  message: "AutoERP API running",
+  version: "1.0.0",
+  timestamp: new Date().toISOString()
+}));
+
+// API Status
+app.get("/api/status", (_req, res) => res.json({
+  status: "OK",
+  database: "Connected",
+  environment: process.env.NODE_ENV || "development"
+}));
+
 
 app.listen(PORT, () => {
   console.log(`🚀 AutoERP Server running on http://localhost:${PORT}`);

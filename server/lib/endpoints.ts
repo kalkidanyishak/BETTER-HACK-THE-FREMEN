@@ -1,9 +1,9 @@
 // src/lib/endpoint.ts
 import { PrismaClient } from "@prisma/client";
 import { Router, type Request, type Response } from "express";
-import { inventoryIncludes } from "./includes/inventoryIncludes";
-import { hrIncludes } from "./includes/hrIncludes";
-import { crmIncludes } from "./includes/crmIncludes";
+import { inventoryIncludes } from "./includes/inventoryIncludes.ts";
+import { hrIncludes } from "./includes/hrIncludes.ts";
+import { crmIncludes } from "./includes/crmIncludes.ts";
 
 const prisma = new PrismaClient();
 
