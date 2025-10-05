@@ -1,11 +1,11 @@
 "use client"
 import SidebarReuse from "@/components/main/data-sidebar";
-import { Package, Tag, Truck, Building, Boxes, MoveRight, Home } from "lucide-react";
+import { Users, User, ClipboardList, PhoneCall, Mail, CalendarCheck, Home } from "lucide-react";
 import React from "react"
 
 
 
-export default function InventoryLayout({
+export default function CMSLayout({
         children,
 }: {
         children: React.ReactNode
@@ -14,13 +14,12 @@ export default function InventoryLayout({
 
         const sidebarItems = [
                 { icon: Home, label: "Home", href: "/dashboard" },
-                { icon: Package, label: "Products", href: "/inventory/products" },
-                { icon: Tag, label: "Categories", href: "/inventory/categories" },
-                { icon: Truck, label: "Suppliers", href: "/inventory/supplier" },
-                { icon: Building, label: "Warehouses", href: "/inventory/warehouse" },
-                { icon: Boxes, label: "Stock", href: "/inventory/stock" },
-                { icon: MoveRight, label: "Stock Movements", href: "/inventory/stock-movements" },
+                { icon: Users, label: "Customers", href: "/crm/customers" },
+                { icon: User, label: "Contacts", href: "/crm/contacts" },
+                { icon: ClipboardList, label: "Opportunities", href: "/crm/opportunities" },
+                { icon: CalendarCheck, label: "Interactions", href: "/crm/interactions" },
         ];
+
 
         return (
                 <div className="flex h-screen w-screen overflow-hidden">
@@ -31,7 +30,7 @@ export default function InventoryLayout({
                         <div className="flex flex-col flex-1">
                                 {/* Header */}
                                 <header className="h-14 border-b flex items-center px-4 bg-background">
-                                        <h1 className="text-lg font-semibold">Inventory</h1>
+                                        <h1 className="text-lg font-semibold">CRM</h1>
                                 </header>
 
                                 {/* Page content */}

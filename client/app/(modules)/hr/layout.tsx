@@ -18,7 +18,7 @@ export default function HRLayout({
                 { icon: Briefcase, label: "Positions", href: "/hr/positions" },
                 { icon: CalendarCheck, label: "Attendances", href: "/hr/attendance" },
                 { icon: Plane, label: "Leaves", href: "/hr/leaves" },
-                { icon: Wallet, label: "Payrolls", href: "/hr/payroll" },
+                { icon: Wallet, label: "Payrolls", href: "/hr/payrolls" },
         ];
 
 
@@ -31,7 +31,7 @@ export default function HRLayout({
                         <div className="flex flex-col flex-1">
                                 {/* Header */}
                                 <header className="h-14 border-b flex items-center px-4 bg-background">
-                                        <h1 className="text-lg font-semibold">Inventory</h1>
+                                        <h1 className="text-lg font-semibold">HR</h1>
                                 </header>
 
                                 {/* Page content */}

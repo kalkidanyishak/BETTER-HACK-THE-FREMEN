@@ -71,11 +71,11 @@ export const positionColumns: ColumnDef<Position>[] = [
 
 // For Attendance schema
 export const attendanceColumns: ColumnDef<Attendance>[] = [
-  {
-    accessorFn: (row) => `${row.employee.firstName} ${row.employee.lastName}`,
-    header: "Employee",
-    id: "employeeName",
-  },
+  // {
+  //   accessorFn: (row) => `${row.employee.firstName} ${row.employee.lastName}`,
+  //   header: "Employee",
+  //   id: "employeeName",
+  // },
   {
     accessorKey: "date",
     header: "Date",
@@ -89,11 +89,11 @@ export const attendanceColumns: ColumnDef<Attendance>[] = [
 
 // For Leave schema
 export const leaveColumns: ColumnDef<Leave>[] = [
-  {
-    accessorFn: (row) => `${row.employee.firstName} ${row.employee.lastName}`,
-    header: "Employee",
-    id: "employeeName",
-  },
+  // {
+  //   accessorFn: (row) => `${row.employee.firstName} ${row.employee.lastName}`,
+  //   header: "Employee",
+  //   id: "employeeName",
+  // },
   {
     accessorKey: "type",
     header: "Leave Type",
@@ -120,11 +120,11 @@ export const leaveColumns: ColumnDef<Leave>[] = [
 
 // For Payroll schema
 export const payrollColumns: ColumnDef<Payroll>[] = [
-  {
-    accessorFn: (row) => `${row.employee.firstName} ${row.employee.lastName}`,
-    header: "Employee",
-    id: "employeeName",
-  },
+  // {
+  //   accessorFn: (row) => `${row.employee.firstName} ${row.employee.lastName}`,
+  //   header: "Employee",
+  //   id: "employeeName",
+  // },
   {
     header: "Period",
     accessorFn: (row) => `${row.month}/${row.year}`,

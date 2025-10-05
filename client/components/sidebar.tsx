@@ -32,9 +32,10 @@ export function Sidebar() {
 
 function SidebarNav() {
   const items = [
-    { icon: Home, label: "Dashboard", href: "/" },
+    { icon: Home, label: "AutoERP", href: "/" },
     { icon: Users, label: "HR", href: "/hr" },
     { icon: Settings, label: "IMS", href: "/inventory" },
+    { icon: Settings, label: "CRM", href: "/crm" },
     { icon: LogOut, label: "Logout", href: "/logout" },
   ]
 
