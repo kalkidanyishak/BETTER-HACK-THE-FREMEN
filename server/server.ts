@@ -1,5 +1,5 @@
 // src/core/server.ts
-import express  { Application, Request, Response } from "express";
+import express from "express";
 import cors from "cors";
 import { endpoint } from "./lib/endpoints";
 
@@ -35,9 +35,7 @@ app.use("/api/interactions", endpoint("interaction"));
 
 app.get("/", (_req, res) => res.json({ message: "AutoERP API running" }));
 
-app.get('/health', (req: Request, res: Response) => {
-  res.status(200).send('OK');
-});
+
 
 app.listen(PORT, () => {
   console.log(`🚀 AutoERP Server running on http://localhost:${PORT}`);
