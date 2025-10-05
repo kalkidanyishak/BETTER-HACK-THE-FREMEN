@@ -1,7 +1,7 @@
 "use client"
 
 import * as React from "react"
-import { Home, Users, Settings, LogOut, Menu } from "lucide-react"
+import { Home, Users, Settings, LogOut, Menu, User, UserCog } from "lucide-react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { ScrollArea } from "@/components/ui/scroll-area"
@@ -36,6 +36,7 @@ function SidebarNav() {
     { icon: Users, label: "HR", href: "/hr" },
     { icon: Settings, label: "IMS", href: "/inventory" },
     { icon: Settings, label: "CRM", href: "/crm" },
+    { icon: UserCog, label: "Admin", href: "/user" },
     { icon: LogOut, label: "Logout", href: "/logout" },
   ]
 
