@@ -33,8 +33,8 @@ export function Sidebar() {
 function SidebarNav() {
   const items = [
     { icon: Home, label: "Dashboard", href: "/" },
-    { icon: Users, label: "Users", href: "/users" },
-    { icon: Settings, label: "Settings", href: "/settings" },
+    { icon: Users, label: "HR", href: "/HR/dashboard" },
+    { icon: Settings, label: "IMS", href: "/IMS/dashboard" },
     { icon: LogOut, label: "Logout", href: "/logout" },
   ]
 
