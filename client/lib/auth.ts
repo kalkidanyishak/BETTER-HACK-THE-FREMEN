@@ -3,6 +3,7 @@ import { nextCookies } from "better-auth/next-js";
 import { Pool } from "pg";
 
 export const auth = betterAuth({
+  baseURL: process.env.BETTER_AUTH_URL || "http://localhost:3000",
   database: new Pool({
     connectionString: process.env.DATABASE_URL,
     ssl:
@@ -19,5 +20,6 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
   },
-   plugins: [nextCookies()] 
+   plugins: [nextCookies()],
+   trustedOrigins:["https://client-zeta-rouge.vercel.app", "http://localhost:3000"]
 });
