@@ -10,9 +10,7 @@ export default function LogoutPage() {
 
   useEffect(() => {
     const handleLogout = async () => {
-      await authClient.signOut({
-        callbackURL: "/", // Redirect to home after logout (or "/login")
-      });
+      await authClient.signOut();
       router.push("/");
     };
 
