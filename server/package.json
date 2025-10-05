@@ -4,6 +4,7 @@
   "description": "AutoERP — BetterHack 2025- The FREMEN",
   "main": "server.ts",
   "scripts": {
+    "build": "npx prisma generate && tsc",
     "dev": "nodemon server.ts",
     "start": "ts-node server.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
