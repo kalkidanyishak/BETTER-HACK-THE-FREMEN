@@ -86,7 +86,7 @@ interface User {
 }
 
 interface Role {
-  id: RoleId;
+  id: string;
   label: string;
   permissions: Permissions;
 }
