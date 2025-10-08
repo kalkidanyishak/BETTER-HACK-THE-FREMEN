@@ -7,10 +7,10 @@ export const employeeColumns: ColumnDef<Employee>[] = [
   //   accessorFn: (row) => `${row.firstName} ${row.lastName}`,
   //   header: "Full Name",
   // },
-  {
-    accessorKey: "email",
-    header: "Email",
-  },
+  // {
+  //  accessorKey: "email",
+  //  header: "Email",
+  // },
   {
     accessorKey: "department.name", // Access nested data
     header: "Department",
