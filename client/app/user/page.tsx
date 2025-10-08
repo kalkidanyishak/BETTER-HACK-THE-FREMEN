@@ -102,7 +102,7 @@ const INITIAL_ROLES = [
   { id: 'viewer' as const, label: 'Viewer', permissions: { project: ['read'], user: [] } },
 ] as const;
 
-type RoleId = Role['id'];
+type RoleId = string
 
 const COMMON_RESOURCES = ['project', 'user'] as const;
 type Resource = typeof COMMON_RESOURCES[number];
